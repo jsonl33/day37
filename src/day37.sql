@@ -59,3 +59,27 @@ select stno,stname,room.roomno,roomname from room,st03
 where room.roomno = st03.roomno
 and stname='신사임당 학생';
 
+select * from st03,room where room.roomno = st03.roomno
+and stname like '%덕%';
+
+select stno,stname,r.roomno,roomname from room r,st03 s where r.roomno = s.roomno and stname like '%신%';
+
+create table salgrade(
+grade number(38) primary key,
+LOSAL number(38) not null,
+HISAL number(38) not null
+);
+
+insert into salgrade values(1,700,1200);
+insert into salgrade values(2,1201,1400);
+insert into salgrade values(3,1401,3000);
+commit;
+
+select * from salgrade order by grade;
+select * from emp05 order by empno;
+
+select ename,sal,grade from emp05, salgrade where sal between LOSAL and HISAL;
+select e.ename, e.sal, s.grade from emp05 e, salgrade s where e.sal >= s.LOSAL and e.sal <= HISAL;
+
+select d.deptno, d.dname, e.ename, e.sal, s.grade from dept05 d, emp05 e, salgrade s 
+where d.deptno = e.deptno and e.sal between s.LOSAL and s.HISAL;
