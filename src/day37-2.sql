@@ -29,3 +29,32 @@ commit;
 select s.st_no, s.st_name, s.st_gender, d.dept_code, d.dept_name 
 from depart11 d inner join student11 s on d.dept_code=s.dept_code
 where s.st_name = '강감찬';
+
+select st_no, st_name, st_gender, dept_code, dept_name 
+from depart11 natural join student11;
+
+create table dept21(
+deptno number(38) primary key,
+dname varchar2(50)
+);
+
+insert into dept21 values(10,'ACCOUNTING');
+insert into dept21 values(20,'RESEARCH');
+
+select * from dept21 order by deptno;
+commit;
+
+create table dept22(
+deptno number(38) primary key,
+dname varchar2(50)
+);
+
+insert into dept22 values(10,'ACCOUNTING');
+insert into dept22 values(30,'SALES');
+commit;
+
+select * from dept22 order by deptno asc;
+
+select * from dept21 left outer join dept22 on dept22.deptno = dept21.deptno;
+select * from dept21 right outer join dept22 using(deptno);
+select * from dept21 full outer join dept22 on dept22.deptno = dept21.deptno;
